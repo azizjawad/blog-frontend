@@ -21,37 +21,7 @@ const routes: RouteRecordRaw[] = [
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
-  },
-  {
-    path: "/forms",
-    name: "Forms",
-    component: Forms,
-  },
-  {
-    path: "/cards",
-    name: "Cards",
-    component: Card,
-  },
-  {
-    path: "/tables",
-    name: "Tables",
-    component: Tables,
-  },
-  {
-    path: "/ui-elements",
-    name: "UIElements",
-    component: UIElements,
-  },
-  {
-    path: "/modal",
-    name: "Modal",
-    component: Modal,
-  },
-  {
-    path: "/blank",
-    name: "Blank",
-    component: Blank,
-  },
+  }
 ];
 
 const router = createRouter({

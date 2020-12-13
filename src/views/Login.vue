@@ -30,8 +30,7 @@
           <input
             type="email"
             class="form-input mt-1 block w-full rounded-md focus:border-indigo-600"
-            v-model="email"
-          />
+            v-model="email"/>
         </label>
 
         <label class="block mt-3">
@@ -43,28 +42,8 @@
           />
         </label>
 
-        <div class="flex justify-between items-center mt-4">
-          <div>
-            <label class="inline-flex items-center">
-              <input type="checkbox" class="form-checkbox text-indigo-600" />
-              <span class="mx-2 text-gray-600 text-sm">Remember me</span>
-            </label>
-          </div>
-
-          <div>
-            <a
-              class="block text-sm fontme text-indigo-700 hover:underline"
-              href="#"
-              >Forgot your password?</a
-            >
-          </div>
-        </div>
-
         <div class="mt-6">
-          <button
-            type="submit"
-            class="py-2 px-4 text-center bg-indigo-600 rounded-md w-full text-white text-sm hover:bg-indigo-500"
-          >
+          <button type="submit" class="py-2 px-4 text-center bg-indigo-600 rounded-md w-full text-white text-sm hover:bg-indigo-500">
             Sign in
           </button>
         </div>
@@ -74,24 +53,35 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+// import { defineComponent, ref } from "vue";
 import { useRouter } from "vue-router";
-
-export default defineComponent({
-  setup() {
-    const router = useRouter();
-    const email = ref("johndoe@mail.com");
-    const password = ref("@#!@#asdf1231!_!@#");
-
-    function login() {
-      router.push("/dashboard");
-    }
-
+import axios from 'axios';
+import config from '../config'
+export default {
+  data() {
     return {
-      login,
-      email,
-      password,
-    };
+      email:"admin@gmail.com",
+      password:"admin@1212",
+    }
   },
-});
+  mounted(){
+      const token = localStorage.getItem('token');
+      if(token) this.$router.push("/dashboard"); 
+  },
+  methods:{
+     async login() {
+      try{
+        const {data} = await axios.post(`${config.apiUrl}/user/login`,
+        {email: this.email, password: this.password});
+        if(data.status === true){
+          localStorage.setItem('token', data.token);
+          this.$router.push("/dashboard");
+        }else
+          alert(data.msg);
+      }catch(err){
+          alert(err)
+      }
+    }
+  }
+};
 </script>

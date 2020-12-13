@@ -1,250 +1,315 @@
 <template>
   <div>
-    <h3 class="text-gray-700 text-3xl font-medium">Dashboard</h3>
+    <!-- <h3 class="text-gray-700 text-3xl font-semibold">Posts</h3> -->
+    <button
+      @click="open = true,modal_title = 'Add New Post'"
+      class="mt-3 px-6 py-3 bg-indigo-600 rounded-md text-white font-medium tracking-wide hover:bg-indigo-500"
+    >
+      Add Posts
+    </button>
 
-    <div class="mt-4">
-      <div class="flex flex-wrap -mx-6">
-        <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
-          <div
-            class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
-          >
-            <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
-              <svg
-                class="h-8 w-8 text-white"
-                viewBox="0 0 28 30"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18.2 9.08889C18.2 11.5373 16.3196 13.5222 14 13.5222C11.6804 13.5222 9.79999 11.5373 9.79999 9.08889C9.79999 6.64043 11.6804 4.65556 14 4.65556C16.3196 4.65556 18.2 6.64043 18.2 9.08889Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M25.2 12.0444C25.2 13.6768 23.9464 15 22.4 15C20.8536 15 19.6 13.6768 19.6 12.0444C19.6 10.4121 20.8536 9.08889 22.4 9.08889C23.9464 9.08889 25.2 10.4121 25.2 12.0444Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M19.6 22.3889C19.6 19.1243 17.0927 16.4778 14 16.4778C10.9072 16.4778 8.39999 19.1243 8.39999 22.3889V26.8222H19.6V22.3889Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M8.39999 12.0444C8.39999 13.6768 7.14639 15 5.59999 15C4.05359 15 2.79999 13.6768 2.79999 12.0444C2.79999 10.4121 4.05359 9.08889 5.59999 9.08889C7.14639 9.08889 8.39999 10.4121 8.39999 12.0444Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M22.4 26.8222V22.3889C22.4 20.8312 22.0195 19.3671 21.351 18.0949C21.6863 18.0039 22.0378 17.9556 22.4 17.9556C24.7197 17.9556 26.6 19.9404 26.6 22.3889V26.8222H22.4Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M6.64896 18.0949C5.98058 19.3671 5.59999 20.8312 5.59999 22.3889V26.8222H1.39999V22.3889C1.39999 19.9404 3.2804 17.9556 5.59999 17.9556C5.96219 17.9556 6.31367 18.0039 6.64896 18.0949Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </div>
-
-            <div class="mx-5">
-              <h4 class="text-2xl font-semibold text-gray-700">8,282</h4>
-              <div class="text-gray-500">New Users</div>
-            </div>
-          </div>
+    <hr />
+    <div class="mt-5">
+      <!-- <h4 class="text-gray-700">Horizontal</h4> -->
+      <div :key="index" v-for="(post,index) in posts" class="max-w-sm w-full lg:max-w-full lg:flex mt-6">
+        <div
+          class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+          title="Woman holding a mug">
+        <img style="object-fit: cover;min-height: 150px;min-width: 150px" :src="'https://blog-node-server-1.herokuapp.com/uploads/'+post.featured_image" alt="">
         </div>
-
-        <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
-          <div
-            class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
-          >
-            <div class="p-3 rounded-full bg-orange-600 bg-opacity-75">
+        <div
+          class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal"
+        >
+          <div style="margin-bottom:0" class="mb-8">
+            <p  class="text-sm text-gray-600 flex items-center">
               <svg
-                class="h-8 w-8 text-white"
-                viewBox="0 0 28 28"
-                fill="none"
+                class="fill-current text-gray-500 w-3 h-3 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
               >
                 <path
-                  d="M4.19999 1.4C3.4268 1.4 2.79999 2.02681 2.79999 2.8C2.79999 3.57319 3.4268 4.2 4.19999 4.2H5.9069L6.33468 5.91114C6.33917 5.93092 6.34409 5.95055 6.34941 5.97001L8.24953 13.5705L6.99992 14.8201C5.23602 16.584 6.48528 19.6 8.97981 19.6H21C21.7731 19.6 22.4 18.9732 22.4 18.2C22.4 17.4268 21.7731 16.8 21 16.8H8.97983L10.3798 15.4H19.6C20.1303 15.4 20.615 15.1004 20.8521 14.6261L25.0521 6.22609C25.2691 5.79212 25.246 5.27673 24.991 4.86398C24.7357 4.45123 24.2852 4.2 23.8 4.2H8.79308L8.35818 2.46044C8.20238 1.83722 7.64241 1.4 6.99999 1.4H4.19999Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M22.4 23.1C22.4 24.2598 21.4598 25.2 20.3 25.2C19.1403 25.2 18.2 24.2598 18.2 23.1C18.2 21.9402 19.1403 21 20.3 21C21.4598 21 22.4 21.9402 22.4 23.1Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M9.1 25.2C10.2598 25.2 11.2 24.2598 11.2 23.1C11.2 21.9402 10.2598 21 9.1 21C7.9402 21 7 21.9402 7 23.1C7 24.2598 7.9402 25.2 9.1 25.2Z"
-                  fill="currentColor"
+                  d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z"
                 />
               </svg>
+              Admin only
+            </p>
+            <div class="flex" style="float:right">
+              <a @click="editPost(post._id),modal_title = 'Edit Post'" href="javascript:">
+                <svg  style="width:21px;color:brown" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </a>&nbsp;&nbsp;
+              <a @click="deletePost(post._id)" href="javascript:">
+                <svg style="width:21px;color:red" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+              </a>
             </div>
-
-            <div class="mx-5">
-              <h4 class="text-2xl font-semibold text-gray-700">200,521</h4>
-              <div class="text-gray-500">Total Orders</div>
+            <div v-text="post.title" class="text-gray-900 font-bold text-xl mb-2">
+              
             </div>
+            <p v-text="post.description" class="text-gray-700 text-base"></p>
+          
           </div>
-        </div>
-
-        <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
-          <div
-            class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white"
-          >
-            <div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
-              <svg
-                class="h-8 w-8 text-white"
-                viewBox="0 0 28 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6.99998 11.2H21L22.4 23.8H5.59998L6.99998 11.2Z"
-                  fill="currentColor"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M9.79999 8.4C9.79999 6.08041 11.6804 4.2 14 4.2C16.3196 4.2 18.2 6.08041 18.2 8.4V12.6C18.2 14.9197 16.3196 16.8 14 16.8C11.6804 16.8 9.79999 14.9197 9.79999 12.6V8.4Z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                />
-              </svg>
-            </div>
-
-            <div class="mx-5">
-              <h4 class="text-2xl font-semibold text-gray-700">215,542</h4>
-              <div class="text-gray-500">Available Products</div>
-            </div>
+          <div class="flex items-center">
+            
           </div>
         </div>
       </div>
     </div>
+    <div
+      :class="`modal ${
+        !open && 'opacity-0 pointer-events-none'
+      } z-50 fixed w-full h-full top-0 left-0 flex items-center justify-center`"
+    >
+      <div
+        class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
+      ></div>
 
-    <div class="mt-8"></div>
-
-    <div class="flex flex-col mt-8">
-      <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto"
+      >
         <div
-          class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
+          class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
         >
-          <table class="min-w-full">
-            <thead>
-              <tr>
-                <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Name
-                </th>
-                <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Title
-                </th>
-                <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Status
-                </th>
-                <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Role
-                </th>
-                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-              </tr>
-            </thead>
+          <svg
+            class="fill-current text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+          >
+            <path
+              d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+            />
+          </svg>
+          <span class="text-sm">(Esc)</span>
+        </div>
 
-            <tbody class="bg-white">
-              <tr v-for="(u, index) in users" :key="index">
-                <td
-                  class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
-                >
-                  <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
-                      <img
-                        class="h-10 w-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
-                    </div>
+        <!-- Add margin if you want to see some of the overlay behind the modal-->
+        <div class="modal-content py-4 text-left px-6">
+          <!--Title-->
+          <div class="flex justify-between items-center pb-3">
+            <p v-text="modal_title" class="text-2xl font-bold"></p>
+            <div class="modal-close cursor-pointer z-50" @click="closeReset">
+              <svg
+                class="fill-current text-black"
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+              >
+                <path
+                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                />
+              </svg>
+            </div>
+          </div>
 
-                    <div class="ml-4">
-                      <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ u.name }}
-                      </div>
-                      <div class="text-sm leading-5 text-gray-500">
-                        {{ u.email }}
-                      </div>
-                    </div>
-                  </div>
-                </td>
+          <!--Body-->
+          <form @submit.prevent="submitForm">
+            <div class="grid grid-cols-1 sm:grid-cols-1 gap-6 mt-4">
+              <div>
+                <label class="text-gray-700" for="username">Title</label>
+                <input v-model="title"
+                  class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                  type="text"
+                />
+              </div>
 
-                <td
-                  class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+              <div>
+                <label class="text-gray-700" for="emailAddress"
+                  >Description</label
                 >
-                  <div class="text-sm leading-5 text-gray-900">
-                    {{ u.title }}
-                  </div>
-                  <div class="text-sm leading-5 text-gray-500">
-                    {{ u.title2 }}
-                  </div>
-                </td>
+                <textarea v-model="description"
+                  class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                ></textarea>
+              </div>
 
-                <td
-                  class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
-                >
-                  <span
-                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-                    >{{ u.status }}</span
-                  >
-                </td>
-
-                <td
-                  class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500"
-                >
-                  {{ u.role }}
-                </td>
-
-                <td
-                  class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
-                >
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                    >Edit</a
-                  >
-                </td>
-              </tr>
-            </tbody>
-          </table>
+              <div>
+                <label class="text-gray-700">Feature Image</label>
+                <label for="file-upload" class="custom-file-upload">
+                  <i class="fa fa-cloud-upload"></i> <span style="font-size:13px">{{this.img_text}}</span>
+                </label>
+                <input style="display:none" id="file-upload" class="form-input w-full mt-2 rounded-md focus:border-indigo-600"
+                  type="file" v-on:change="handleFileUpload"
+                />
+                <input type="hidden" v-model="id"/>
+              </div>
+            </div><br>
+            <button type="submit" class="px-6 py-3 bg-indigo-600 rounded-md text-white font-medium tracking-wide hover:bg-indigo-500" style="float:right">
+              Submit
+            </button><br><br>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </template>
-
+<style lang="css">
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: block;
+  padding: 6px 12px;
+  margin-top: 7px;
+  cursor: pointer; 
+}
+</style>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from 'vue';
+import axios from 'axios';
+import config from '../config';
 
 interface User {
-  name: string;
+  username: string;
   email: string;
-  title: string;
-  title2: string;
-  status: string;
-  role: string;
+  password: string;
+  confirm: string;
 }
 
 export default defineComponent({
-  setup() {
-    const testUser: User = {
-      name: "John Doe",
-      email: "john@example.com",
-      title: "Software Engineer",
-      title2: "Web dev",
-      status: "Active",
-      role: "Owner",
-    };
-
-    const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
-
+  data(){
     return {
-      users,
+      posts: null,
+      id:"",
+      title:"",
+      description:"",
+      img_text: "Upload",
+      featured_image: "",
+      token: localStorage.getItem('token')
+    }
+  },
+  methods:{
+      submitForm(){
+        let formData = new FormData();
+        formData.append('title', this.title);
+        formData.append('description', this.description);
+        let apiPath;
+        let msg;
+        if(this.featured_image)
+          formData.append('featured_image', this.featured_image);
+        if(this.id !== ''){
+          formData.append('id', this.id);
+          apiPath = '/posts/update';
+          msg = 'Post updated successfully!!';
+        }else{
+          apiPath = '/posts/create';
+          msg = 'Post created successfully!!';
+        }
+        axios.post( config.apiUrl + apiPath, formData, {
+        headers: {"auth-token": this.token},
+        }).then((res) => {
+          if(res.data.status == true){
+            this.$swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: msg,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.fetchPosts();
+          }else{
+            this.$swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: 'Opps!! Something went wrong',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }
+        })
+        .catch(function(err){
+          console.log(err);
+      });
+    },
+    handleFileUpload(event){
+      this.img_text = event.target.files[0].name;
+      this.featured_image = event.target.files[0];
+    },
+    deletePost(id){
+      this.$swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete( `${config.apiUrl}/posts/delete`,{
+                headers: {"auth-token": this.token},
+                data:{id}
+          }).then((res) => {
+              if(res.data.status == true){
+                this.$swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Post has been deleted',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                this.fetchPosts();
+              }
+            })
+            .catch(function(err){
+              this.$swal.fire({
+                  position: 'top-end',
+                  icon: 'error',
+                  title: 'Opps!! Something went wrong',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+          });
+        }
+      })
+    },
+    closeReset(){
+        this.title = '';
+        this.description = '';
+        this.open = false;
+        this.img_text = 'Upload';
+        this.id = '';
+    },
+    editPost(id){
+      axios.get(`${config.apiUrl}/posts/get/`+id,{
+          headers: {"auth-token": this.token}
+      }).then(res => {
+        if(res.data){
+          this.title = res.data.title;
+          this.description = res.data.description;
+          this.open = true;
+          this.id = id;
+          if(res.data.featured_image !== '')
+            this.img_text = res.data.featured_image;
+        }
+      });
+    },
+    async fetchPosts(){
+       const posts = await axios.get(`${config.apiUrl}/posts/get`,{
+            headers: {"auth-token": this.token}
+        })
+        this.posts = posts.data;
+        this.closeReset()
+    }
+  },
+  async created(){
+    if(this.token){
+      try{
+        const user = await axios.get(`${config.apiUrl}/get/user`,{
+          headers: {"auth-token": this.token}
+        });
+        this.fetchPosts();
+      }catch(err){
+        localStorage.removeItem('token');
+        this.$router.push('/');
+      };
+    }else this.$router.push('/');
+  },
+  setup() {
+    const open = ref(false);
+    return {
+      open
     };
   },
 });
